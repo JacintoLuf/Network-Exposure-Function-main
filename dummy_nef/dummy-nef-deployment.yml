@@ -4,16 +4,16 @@ kind: Deployment
 metadata:
   name: dummy-nef-deployment
   labels:
-    app: flask-dummy-nef
+    app: dummy-nef
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-dummy-nef
+      app: dummy-nef
   template:
     metadata:
       labels:
-        app: flask-dummy-nef
+        app: dummy-nef
     spec:
       containers:
         - name: dummy-nef
@@ -28,12 +28,12 @@ kind: Service
 metadata:
   name: dummy-nef-service
   labels:
-    app: flask-dummy-nef
+    app: dummy-nef
 spec:
   ports:
   - port: 5000
     protocol: TCP
     targetPort: 5000
   selector:
-    app: flask-dummy-nef
+    app: dummy-nef
   type: LoadBalancer
