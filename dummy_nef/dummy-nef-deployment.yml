@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-nef-deployment
+  labels:
+    app: dummy-nef
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy-nef
+  template:
+    metadata:
+      labels:
+        app: dummy-nef
+    spec:
+      containers:
+        - name: dummy-nef
+          image: dummy-nef
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy-nef-service
+  labels:
+    app: dummy-nef
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: dummy-nef
+  type: LoadBalancer
